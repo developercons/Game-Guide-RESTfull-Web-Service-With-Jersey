@@ -1,24 +1,32 @@
 package com.margin.game_guide_server.model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Created by Martha on 4/30/2016.
  */
 @XmlRootElement
 public class UserModel {
+    @Expose
     private long id;
+    @Expose
     private String first_name;
+    @Expose
     private String last_name;
+    @Expose
     private String email;
+    @Expose
     private String phone;
+    @Expose
     private String token;
+    @Expose
     private byte[] avatar;
 
-    @XmlTransient
+    @Expose(serialize = false)
     private String password;
-    @XmlTransient
+    @Expose(serialize = false)
     private String udid;
 
     public long getId() {

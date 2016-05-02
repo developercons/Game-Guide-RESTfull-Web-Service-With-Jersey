@@ -1,5 +1,7 @@
 package com.margin.game_guide_server.response;
 
+import com.google.gson.annotations.Expose;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -7,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class ResultResponse<T> {
+    @Expose
     private T result;
 
     public ResultResponse(T result) {

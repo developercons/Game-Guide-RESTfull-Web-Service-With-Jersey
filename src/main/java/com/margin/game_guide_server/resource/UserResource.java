@@ -66,6 +66,7 @@ public class UserResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
         }
         return Response.ok().entity(new ResultResponse<>(currentUser)).build();
+//        return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(3, "Wrong arguments")).build();
     }
 
 
