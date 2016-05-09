@@ -1,8 +1,7 @@
 package com.margin.game_guide_server.resource;
 
 import com.margin.game_guide_server.model.UserModel;
-import com.margin.game_guide_server.response.ErrorResponse;
-import com.margin.game_guide_server.response.ResultResponse;
+import com.margin.game_guide_server.response.ResponseBundle;
 import com.margin.game_guide_server.service.UserService;
 
 import javax.ws.rs.*;
@@ -23,32 +22,35 @@ public class UserResource {
     @POST
     @Path("/sign_up")
     public Response signUp(UserModel userModel){
+        ResponseBundle<UserModel> response;
         if (userModel.getEmail() == null || userModel.getPassword() == null
                 || userModel.getFirst_name() == null || userModel.getLast_name() == null){
-            ErrorResponse errorResponse = new ErrorResponse(1, "Data missing");
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+            response = new ResponseBundle<>(1, "Data missing");
+            return Response.ok().entity(response).build();
         }
         if(userService.userExists(userModel)){
-            ErrorResponse errorResponse = new ErrorResponse(2, "User already exists");
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+            response = new ResponseBundle<>(2, "User already exists");
+            return Response.ok().entity(response).build();
         }
-        UserModel user = userService.createUser(userModel);
-        return Response.ok().entity(user).build();
+        response = new ResponseBundle<>(userService.createUser(userModel));
+        return Response.ok().entity(response).build();
     }
 
     @POST
     @Path("/login")
     public Response login(UserModel userModel){
+        ResponseBundle<UserModel> response;
         if(userModel.getEmail() == null || userModel.getPassword() == null){
-            ErrorResponse errorResponse = new ErrorResponse(1, "Data missing");
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+            response = new ResponseBundle<>(1, "Data missing");
+            return Response.ok().entity(response).build();
         }
         UserModel currentUser =  userService.login(userModel);
         if (currentUser == null){
-            ErrorResponse errorResponse = new ErrorResponse(3, "Wrong email or password!");
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+            response = new ResponseBundle<>(3, "Wrong email or password!");
+            return Response.ok().entity(response).build();
         }
-        return Response.ok().entity(currentUser).build();
+        response = new ResponseBundle<UserModel>(currentUser);
+        return Response.ok().entity(response).build();
     }
 
     @GET
@@ -60,17 +62,38 @@ public class UserResource {
     @GET
     @Path("/user")
     public Response getUser(@HeaderParam("TOKEN") String token){
+        ResponseBundle<UserModel> response;
         UserModel currentUser = userService.getUserByToken(token);
         if (currentUser == null){
-            ErrorResponse errorResponse = new ErrorResponse(3, "Wrong arguments");
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
+            response = new ResponseBundle<>(3, "Wrong arguments");
+            return Response.ok().entity(response).build();
         }
-        return Response.ok().entity(new ResultResponse<>(currentUser)).build();
-//        return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorResponse(3, "Wrong arguments")).build();
+        return Response.ok().entity(new ResponseBundle<>(currentUser)).build();
     }
 
+    @PUT
+    @Path("/update")
+    public Response update(@HeaderParam("TOKEN") String token, UserModel userModel){
+        ResponseBundle<String> response;
+        if(userService.updateUser(userModel, token)){
+            response = new ResponseBundle<>("User updated");
+            return Response.ok().entity(response).build();
+        }
+        response = new ResponseBundle<>(3, "No such user");
+        return Response.ok().entity(response).build();
+    }
 
-
+    @POST
+    @Path("/logout")
+    public Response logout(@HeaderParam("TOKEN") String token){
+        ResponseBundle<String> response;
+        if(userService.logout(token)){
+            response = new ResponseBundle<>("Logged out");
+            return Response.ok().entity(response).build();
+        }
+        response = new ResponseBundle<>(3, "Logout failed");
+        return Response.ok().entity(response).build();
+    }
 
 
 }

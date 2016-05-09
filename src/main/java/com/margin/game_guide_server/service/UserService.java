@@ -1,6 +1,6 @@
 package com.margin.game_guide_server.service;
 
-import com.margin.game_guide_server.data.DataBase;
+import com.margin.game_guide_server.data.Database;
 import com.margin.game_guide_server.model.UserModel;
 
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ import java.util.UUID;
  */
 public class UserService {
 
-    private HashMap<String, UserModel> userMap = DataBase.instance().getUserMap();
-    private HashMap<String, String> mailMap = DataBase.instance().getMailMap();
+    private HashMap<String, UserModel> userMap = Database.instance().getUserMap();
+    private HashMap<String, String> mailMap = Database.instance().getMailMap();
     private long userId;
 
     public UserModel createUser(UserModel user){
@@ -24,16 +24,39 @@ public class UserService {
         userMap.put(email, user);
         return user;
     }
-    public List<UserModel> getAllUsers() {
-        return new ArrayList<>(userMap.values());
-    }
-
     public UserModel login(UserModel userModel){
         if(!userExists(userModel) || !userModel.getPassword().equals(getUserByEmail(userModel.getEmail()).getPassword()))
             return null;
         UserModel currentUser = getUserByEmail(userModel.getEmail());
         if(currentUser.getToken() == null) assignToken(currentUser);
         return currentUser;
+    }
+
+    public boolean updateUser(UserModel userModel, String token){
+        UserModel currentUser = getUserByToken(token);
+        if(currentUser == null) return false;
+        mailMap.remove(token);
+        userMap.remove(currentUser.getEmail());
+        currentUser.setFirst_name(userModel.getFirst_name());
+        currentUser.setLast_name(userModel.getLast_name());
+        currentUser.setEmail(userModel.getEmail());
+        currentUser.setPhone(userModel.getPhone());
+        currentUser.setAvatar(userModel.getAvatar());
+        userMap.put(currentUser.getEmail(), currentUser);
+        mailMap.put(token, currentUser.getEmail());
+        return true;
+    }
+
+    public boolean logout(String token){
+        UserModel currentUser = getUserByToken(token);
+        if(currentUser == null) return false;
+        mailMap.remove(token);
+        currentUser.setToken(null);
+        return true;
+    }
+
+    public List<UserModel> getAllUsers() {
+        return new ArrayList<>(userMap.values());
     }
 
     private void assignToken(UserModel user){

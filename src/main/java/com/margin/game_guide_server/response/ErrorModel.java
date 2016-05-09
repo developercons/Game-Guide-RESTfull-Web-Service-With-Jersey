@@ -1,5 +1,7 @@
 package com.margin.game_guide_server.response;
 
+import com.google.gson.annotations.Expose;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -7,7 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class ErrorModel {
+    @Expose
     private int code;
+    @Expose
     private String message;
 
     public ErrorModel(int code, String message) {

@@ -35,7 +35,6 @@ public class GsonProvider<T> implements MessageBodyReader<T>, MessageBodyWriter<
 
     public GsonProvider(){
         GsonBuilder gsonBuilder = new GsonBuilder()
-                .serializeNulls()
                 .enableComplexMapKeySerialization();
         this.gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
         this.prettyGson = gsonBuilder.setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();

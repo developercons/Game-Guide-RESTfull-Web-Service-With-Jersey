@@ -3,6 +3,7 @@ package com.margin.game_guide_server.model;
 import com.google.gson.annotations.Expose;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 
 /**
  * Created by Martha on 4/30/2016.
@@ -28,6 +29,24 @@ public class UserModel {
     private String password;
     @Expose(serialize = false)
     private String udid;
+
+    private ArrayList<Integer> reviewedGameIdList;
+
+    public String getFullName(){
+        return first_name + " " + last_name;
+    }
+
+    public void addReviewedGame(Integer gameId){
+        reviewedGameIdList.add(gameId);
+    }
+
+    public ArrayList<Integer> getReviewedGameIdList(){
+        return reviewedGameIdList;
+    }
+
+    public void removeReviewedGame(Integer gameId){
+        reviewedGameIdList.remove(gameId);
+    }
 
     public long getId() {
         return id;

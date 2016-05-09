@@ -15,8 +15,6 @@ public class GameModel {
     @Expose
     private String category;
     @Expose
-    private int reviewQuantity;
-    @Expose
     private int expertMark;
     @Expose
     private String ageRange;
@@ -54,14 +52,6 @@ public class GameModel {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public int getReviewQuantity() {
-        return reviewQuantity;
-    }
-
-    public void setReviewQuantity(int reviewQuantity) {
-        this.reviewQuantity = reviewQuantity;
     }
 
     public int getExpertMark() {

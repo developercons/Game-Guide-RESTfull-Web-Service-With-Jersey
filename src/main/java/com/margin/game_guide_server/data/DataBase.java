@@ -8,22 +8,18 @@ import java.util.HashMap;
 /**
  * Created by Martha on 4/30/2016.
  */
-public class DataBase {
-    private static DataBase instance = new DataBase();
+public class Database {
+    private static Database instance = new Database();
 
-    private HashMap<String, UserModel> userMap;
-    private HashMap<String, String> mailMap;
-    private HashMap<Long, GameModel> mathGameMap;
-    private HashMap<Long, GameModel> puzzleGameMap;
-    private HashMap<Long, GameModel> rolePlayingGameMap;
+    private HashMap<String, UserModel> userMap; // Email - User
+    private HashMap<String, String> mailMap; // Token - Email
+    private HashMap<Long, GameModel> gameMap; // Game ID - Game
 
 
-    private DataBase() {
+    private Database() {
         userMap = new HashMap<>();
         mailMap = new HashMap<>();
-        mathGameMap = new HashMap<>();
-        puzzleGameMap = new HashMap<>();
-        rolePlayingGameMap = new HashMap<>();
+        gameMap = new HashMap<>();
     }
 
     public HashMap<String, UserModel> getUserMap() {
@@ -34,19 +30,11 @@ public class DataBase {
         return mailMap;
     }
 
-    public HashMap<Long, GameModel> getMathGameMap() {
-        return mathGameMap;
+    public HashMap<Long, GameModel> getGameMap() {
+        return gameMap;
     }
 
-    public HashMap<Long, GameModel> getPuzzleGameMap() {
-        return puzzleGameMap;
-    }
-
-    public HashMap<Long, GameModel> getRolePlayingGameMap() {
-        return rolePlayingGameMap;
-    }
-
-    public static DataBase instance() {
+    public static Database instance() {
         return instance;
     }
 }
