@@ -22,13 +22,12 @@ public class UserModel {
     private String phone;
     @Expose
     private String token;
-    @Expose
-    private byte[] avatar;
-
     @Expose(serialize = false)
     private String password;
     @Expose(serialize = false)
     private String udid;
+
+    private byte[] avatarBytes;
 
     private ArrayList<Integer> reviewedGameIdList;
 
@@ -112,11 +111,11 @@ public class UserModel {
         this.token = token;
     }
 
-    public byte[] getAvatar() {
-        return avatar;
+    public byte[] getAvatarBytes() {
+        return avatarBytes;
     }
 
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
+    public void setAvatarBytes(byte[] avatarBytes) {
+        this.avatarBytes = avatarBytes;
     }
 }

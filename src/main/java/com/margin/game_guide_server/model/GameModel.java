@@ -22,12 +22,22 @@ public class GameModel {
     private String expertDefinition;
     @Expose
     private String expertReview;
-    @Expose
-    private byte[] avatar;
-    @Expose
+
     private ArrayList<ReviewModel> reviews = new ArrayList<>();
 
+
+    private byte[] avatar;
+
     public GameModel() {
+    }
+    public GameModel(long id, String name, String category, int expertMark, String ageRange, String expertDefinition, String expertReview) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.expertMark = expertMark;
+        this.ageRange = ageRange;
+        this.expertDefinition = expertDefinition;
+        this.expertReview = expertReview;
     }
 
     public long getId() {
@@ -90,7 +100,7 @@ public class GameModel {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatarBytes(byte[] avatar) {
         this.avatar = avatar;
     }
 

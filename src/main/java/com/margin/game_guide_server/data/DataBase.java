@@ -13,7 +13,7 @@ public class Database {
 
     private HashMap<String, UserModel> userMap; // Email - User
     private HashMap<String, String> mailMap; // Token - Email
-    private HashMap<Long, GameModel> gameMap; // Game ID - Game
+    private HashMap<String, HashMap<Long, GameModel>> gameMap; // Category - Game ID - Game Model
 
 
     private Database() {
@@ -30,7 +30,7 @@ public class Database {
         return mailMap;
     }
 
-    public HashMap<Long, GameModel> getGameMap() {
+    public HashMap<String, HashMap<Long, GameModel>> getGameMap() {
         return gameMap;
     }
 

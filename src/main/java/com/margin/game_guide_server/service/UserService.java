@@ -41,7 +41,7 @@ public class UserService {
         currentUser.setLast_name(userModel.getLast_name());
         currentUser.setEmail(userModel.getEmail());
         currentUser.setPhone(userModel.getPhone());
-        currentUser.setAvatar(userModel.getAvatar());
+        currentUser.setAvatarBytes(userModel.getAvatarBytes());
         userMap.put(currentUser.getEmail(), currentUser);
         mailMap.put(token, currentUser.getEmail());
         return true;

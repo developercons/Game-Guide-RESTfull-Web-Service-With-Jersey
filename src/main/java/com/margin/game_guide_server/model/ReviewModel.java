@@ -22,7 +22,7 @@ public class ReviewModel {
 
     public void update() {
         this.author = userModel.getFullName();
-        this.profPic = userModel.getAvatar();
+        this.profPic = userModel.getAvatarBytes();
     }
 
     public UserModel getUserModel() {

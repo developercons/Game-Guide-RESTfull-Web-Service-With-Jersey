@@ -3,6 +3,7 @@ package com.margin.game_guide_server.resource;
 import com.margin.game_guide_server.model.UserModel;
 import com.margin.game_guide_server.response.ResponseBundle;
 import com.margin.game_guide_server.service.UserService;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -73,14 +74,19 @@ public class UserResource {
 
     @PUT
     @Path("/update")
-    public Response update(@HeaderParam("TOKEN") String token, UserModel userModel){
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response update(@HeaderParam("TOKEN") String token,
+                           @FormDataParam("user") UserModel userModel,
+                           @FormDataParam("picture") byte[] picture){
         ResponseBundle<String> response;
+        userModel.setAvatarBytes(picture);
         if(userService.updateUser(userModel, token)){
             response = new ResponseBundle<>("User updated");
             return Response.ok().entity(response).build();
         }
         response = new ResponseBundle<>(3, "No such user");
         return Response.ok().entity(response).build();
+
     }
 
     @POST
@@ -94,6 +100,19 @@ public class UserResource {
         response = new ResponseBundle<>(3, "Logout failed");
         return Response.ok().entity(response).build();
     }
+
+    @GET
+    @Path("/profile_picture")
+    @Produces("image/png")
+    public Response downloadProfPic(@HeaderParam("TOKEN") String token){
+        if(token != null){
+            UserModel currentUser =  userService.getUserByToken(token);
+            if(currentUser != null){
+                return Response.ok().entity(userService.getUserByToken(token).getAvatarBytes()).build();}
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity("No such user").build();
+    }
+
 
 
 }
