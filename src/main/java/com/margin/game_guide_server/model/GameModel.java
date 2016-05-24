@@ -15,13 +15,13 @@ public class GameModel {
     @Expose
     private String category;
     @Expose
-    private int expertMark;
+    private int expert_mark;
     @Expose
-    private String ageRange;
+    private String age_range;
     @Expose
-    private String expertDefinition;
+    private String expert_definition;
     @Expose
-    private String expertReview;
+    private String expert_review;
 
     private ArrayList<ReviewModel> reviews = new ArrayList<>();
 
@@ -30,14 +30,14 @@ public class GameModel {
 
     public GameModel() {
     }
-    public GameModel(long id, String name, String category, int expertMark, String ageRange, String expertDefinition, String expertReview) {
+    public GameModel(long id, String name, String category, int expert_mark, String age_range, String expert_definition, String expert_review) {
         this.id = id;
         this.name = name;
         this.category = category;
-        this.expertMark = expertMark;
-        this.ageRange = ageRange;
-        this.expertDefinition = expertDefinition;
-        this.expertReview = expertReview;
+        this.expert_mark = expert_mark;
+        this.age_range = age_range;
+        this.expert_definition = expert_definition;
+        this.expert_review = expert_review;
     }
 
     public long getId() {
@@ -64,36 +64,36 @@ public class GameModel {
         this.category = category;
     }
 
-    public int getExpertMark() {
-        return expertMark;
+    public int getExpert_mark() {
+        return expert_mark;
     }
 
-    public void setExpertMark(int expertMark) {
-        this.expertMark = expertMark;
+    public void setExpert_mark(int expert_mark) {
+        this.expert_mark = expert_mark;
     }
 
-    public String getAgeRange() {
-        return ageRange;
+    public String getAge_range() {
+        return age_range;
     }
 
-    public void setAgeRange(String ageRange) {
-        this.ageRange = ageRange;
+    public void setAge_range(String age_range) {
+        this.age_range = age_range;
     }
 
-    public String getExpertDefinition() {
-        return expertDefinition;
+    public String getExpert_definition() {
+        return expert_definition;
     }
 
-    public void setExpertDefinition(String expertDefinition) {
-        this.expertDefinition = expertDefinition;
+    public void setExpert_definition(String expert_definition) {
+        this.expert_definition = expert_definition;
     }
 
-    public String getExpertReview() {
-        return expertReview;
+    public String getExpert_review() {
+        return expert_review;
     }
 
-    public void setExpertReview(String expertReview) {
-        this.expertReview = expertReview;
+    public void setExpert_review(String expert_review) {
+        this.expert_review = expert_review;
     }
 
     public byte[] getAvatar() {

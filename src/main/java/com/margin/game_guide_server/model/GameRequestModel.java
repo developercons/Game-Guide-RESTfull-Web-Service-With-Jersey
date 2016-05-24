@@ -9,13 +9,13 @@ public class GameRequestModel {
     @Expose
     private String category;
     @Expose
-    private Long gameId;
+    private Long id;
 
     public String getCategory() {
         return category;
     }
 
-    public Long getGameId() {
-        return gameId;
+    public Long getId() {
+        return id;
     }
 }

@@ -2,16 +2,9 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/assets/1.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/2.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/3.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/4.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/5.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/6.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/7.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/8.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/assets/9.png" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/margin/game_guide_server/data/ImageLoader.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/assets/1.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/images/KIDS" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/images/ROLE_PLAYING" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/images/STRATEGY" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/images/TOWER_DEFENCE" charset="windows-1252" />
   </component>
 </project>

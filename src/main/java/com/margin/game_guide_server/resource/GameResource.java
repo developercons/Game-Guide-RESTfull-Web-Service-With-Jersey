@@ -5,7 +5,9 @@ import com.margin.game_guide_server.model.GameRequestModel;
 import com.margin.game_guide_server.response.ResponseBundle;
 import com.margin.game_guide_server.service.GameService;
 
+import javax.servlet.ServletContext;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Set;
@@ -19,7 +21,11 @@ import java.util.Set;
 @Produces(MediaType.APPLICATION_JSON)
 public class GameResource {
 
+    public static final String RES_REL_PATH = "/WEB-INF/images/";
     private static GameService gameService = new GameService();
+
+    @Context
+    private ServletContext context;
 
     @GET
     @Path("/category_list")
@@ -39,7 +45,7 @@ public class GameResource {
     @Path("/game")
     public Response getGame(GameRequestModel requestModel){
         ResponseBundle<GameModel> response = new ResponseBundle<>(gameService.getAGame(requestModel.getCategory(),
-                requestModel.getGameId()));
+                requestModel.getId()));
         return Response.ok().entity(response).build();
     }
 
@@ -47,7 +53,8 @@ public class GameResource {
     @Path("/game_picture")
     @Produces("image/png")
     public Response downloadGamePicture(GameRequestModel requestModel){
-        return Response.ok().entity(gameService.getAGame(requestModel.getCategory(), requestModel.getGameId()).getAvatar()).build();
+        String imagePath = RES_REL_PATH +  "/" + requestModel.getCategory() + "/" + requestModel.getId() +requestModel.getCategory() +  ".png";
+        System.out.println("**********************" + imagePath + "******************************");
+        return Response.ok().entity(context.getResourceAsStream(imagePath)).build();
     }
-
 }
